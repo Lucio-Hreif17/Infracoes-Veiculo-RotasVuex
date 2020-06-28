@@ -1,13 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="nav" v-show="false">
+      <router-link to="/">Pesquisar Veiculo</router-link> |
+      <router-link to="/CompoSecundario">Infracoes Cometidas</router-link>
     </div>
     <router-view/>
   </div>
 </template>
-
+<script>
+const axios = require("axios");
+export default{
+  mounted(){
+    axios.get("http://localhost:8080/multas.json").then(infracoesPlaca => this.$store.state.placas = infracoesPlaca.data)
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
